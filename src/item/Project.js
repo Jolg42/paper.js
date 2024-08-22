@@ -866,7 +866,9 @@ var Project = PaperScopeItem.extend(/** @lends Project# */{
         // Increase the _updateVersion before the draw-loop. After that, items
         // that are visible will have their _updateVersion set to the new value.
         this._updateVersion++;
-        ctx.save();
+        // ctx.save();
+        console.log(".save() from Project.draw()");
+
         matrix.applyToContext(ctx);
         // Use new Base() so we can use param.extend() to easily override values
         var children = this._children,
@@ -883,11 +885,14 @@ var Project = PaperScopeItem.extend(/** @lends Project# */{
         for (var i = 0, l = children.length; i < l; i++) {
             children[i].draw(ctx, param);
         }
-        ctx.restore();
+        // ctx.restore();
+        console.log(".restore() from Project.draw()");
 
         // Draw the selection of the selected items in the project:
         if (this._selectionCount > 0) {
-            ctx.save();
+            // ctx.save();
+            console.log(".save() 2 from Project.draw()");
+
             ctx.strokeWidth = 1;
             var items = this._selectionItems,
                 size = this._scope.settings.handleSize,
@@ -895,7 +900,8 @@ var Project = PaperScopeItem.extend(/** @lends Project# */{
             for (var id in items) {
                 items[id]._drawSelection(ctx, matrix, size, items, version);
             }
-            ctx.restore();
+            // ctx.restore();
+            console.log(".restore() 2 from Project.draw()");
         }
     }
 });

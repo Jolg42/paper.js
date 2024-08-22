@@ -45,7 +45,9 @@ var CanvasView = View.extend(/** @lends CanvasView# */{
         var ctx = this._context = canvas.getContext('2d');
         // Save context right away, and restore in #remove(). Also restore() and
         // save() again in _setElementSize() to prevent accumulation of scaling.
-        ctx.save();
+        // ctx.save();
+        console.log(".save() from CanvasView.initialize()");
+
         this._pixelRatio = 1;
         if (!/^off|false$/.test(PaperScope.getAttribute(canvas, 'hidpi'))) {
             // Hi-DPI Canvas support based on:
@@ -61,7 +63,9 @@ var CanvasView = View.extend(/** @lends CanvasView# */{
     },
 
     remove: function remove() {
-        this._context.restore();
+        // this._context.restore();
+        console.log(".restore() from CanvasView.remove()");
+
         return remove.base.call(this);
     },
 
@@ -82,8 +86,10 @@ var CanvasView = View.extend(/** @lends CanvasView# */{
             }
             // Scale the context to counter the fact that we've manually scaled
             // our canvas element.
-            ctx.restore();
-            ctx.save();
+            // ctx.restore();
+            // ctx.save();
+            console.log(".save() & .restore() from CanvasView._setElementSize()");
+
             ctx.scale(pixelRatio, pixelRatio);
         }
     },

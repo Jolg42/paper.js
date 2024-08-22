@@ -638,7 +638,8 @@ var Raster = Item.extend(/** @lends Raster# */{
             // Clear the sample canvas:
             ctx.clearRect(0, 0, sampleSize + 1, sampleSize + 1);
         }
-        ctx.save();
+        // ctx.save();
+        console.log(".save() & from Raster#getAverageColor()");
         // Scale the context so that the bounds ends up at the given sample size
         var matrix = new Matrix()
                 .scale(width / bounds.width, height / bounds.height)
@@ -654,7 +655,9 @@ var Raster = Item.extend(/** @lends Raster# */{
             size = this._size;
         if (element)
             ctx.drawImage(element, -size.width / 2, -size.height / 2);
-        ctx.restore();
+        // ctx.restore();
+        console.log(".restore() & from Raster#getAverageColor()");
+
         // Get pixel data from the context and calculate the average color value
         // from it, taking alpha into account.
         var pixels = ctx.getImageData(0.5, 0.5, Math.ceil(width),

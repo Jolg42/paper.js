@@ -1823,11 +1823,13 @@ new function() { // Injection scope for various item event handlers
         if (!rasterSize.isZero()) {
             var ctx = raster.getContext(true),
                 matrix = new Matrix().scale(scale).translate(topLeft.negate());
-            ctx.save();
+            // ctx.save();
             matrix.applyToContext(ctx);
             // See Project#draw() for an explanation of new Base()
             this.draw(ctx, new Base({ matrices: [matrix] }));
-            ctx.restore();
+            // ctx.restore();
+            console.log(".save() & .restore() from rasterize");
+
         }
         raster._matrix.set(
             new Matrix()
@@ -4469,7 +4471,9 @@ new function() { // Injection scope for hit-test functions shared with project
             if (pixelRatio !== 1)
                 ctx.scale(pixelRatio, pixelRatio);
         }
-        ctx.save();
+        // ctx.save();
+        console.log(".save() & from Item.draw()");
+
         // Get the transformation matrix for non-scaling strokes.
         var strokeMatrix = parentStrokeMatrix
                 ? parentStrokeMatrix.appended(matrix)
@@ -4513,7 +4517,9 @@ new function() { // Injection scope for hit-test functions shared with project
                 ctx.translate(-offset.x, -offset.y);
         }
         this._draw(ctx, param, viewMatrix, strokeMatrix);
-        ctx.restore();
+        // ctx.restore();
+        console.log(".restore() & from Item.draw()");
+
         matrices.pop();
         if (param.clip && !param.dontFinish) {
             // Pass fill-rule to handle clipping with compound-paths (#1361).

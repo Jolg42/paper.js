@@ -235,7 +235,8 @@ var BlendMode = new function() {
             // Multiplying should lead to #220000 (34)
             var darken = mode === 'darken',
                 ok = false;
-            ctx.save();
+            // ctx.save();
+            console.log(".save() from BlendMode.js");
             // FF 3.6 throws exception when setting globalCompositeOperation to
             // unsupported values.
             try {
@@ -251,7 +252,8 @@ var BlendMode = new function() {
                             ? 170 : 51;
                 }
             } catch (e) {}
-            ctx.restore();
+            // ctx.restore();
+            console.log(".restore() from BlendMode.js");
             nativeModes[mode] = ok;
         });
         CanvasProvider.release(ctx);
@@ -262,7 +264,7 @@ var BlendMode = new function() {
             normal = mode === 'normal';
         // Use native blend-modes if supported, and fall back to emulation.
         if (normal || nativeModes[mode]) {
-            dstContext.save();
+            // dstContext.save();
             // Reset transformations, since we're blitting and pixel scale and
             // with a given offset.
             dstContext.setTransform(1, 0, 0, 1, 0, 0);
@@ -270,7 +272,8 @@ var BlendMode = new function() {
             if (!normal)
                 dstContext.globalCompositeOperation = mode;
             dstContext.drawImage(srcCanvas, offset.x, offset.y);
-            dstContext.restore();
+            // dstContext.restore();
+            console.log(".save() and .restore() from process BlendMode.js");
         } else {
             var process = modes[mode];
             if (!process)

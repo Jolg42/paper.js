@@ -46,7 +46,9 @@ var CanvasProvider = Base.exports.CanvasProvider = {
             canvas.height = height;
         }
         // We save on retrieval and restore on release.
-        ctx.save();
+        // ctx.save();
+        console.log(".save() from CanvasProvider.getCanvas()");
+
         return canvas;
     },
 
@@ -60,7 +62,8 @@ var CanvasProvider = Base.exports.CanvasProvider = {
         var canvas = obj && obj.canvas ? obj.canvas : obj;
         if (canvas && canvas.getContext) {
             // We restore contexts on release(), see getCanvas()
-            canvas.getContext('2d').restore();
+            // canvas.getContext('2d').restore();
+            console.log(".restore() from CanvasProvider.release()");
             this.canvases.push(canvas);
         }
     }
